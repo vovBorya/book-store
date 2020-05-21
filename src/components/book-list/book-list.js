@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BookListItem from "../book-list-item";
-import './book-list.css'
+import './book-list.css';
+import { connect } from 'react-redux'
 
 class BookList extends Component {
 
@@ -9,11 +10,12 @@ class BookList extends Component {
     const { books } = this.props;
 
     return (
-      <div>
-        <ul>
+      <div className="jumbotron book-list">
+        <ul className="list-group">
           {
             books.map((book) => (
               <li
+                className="list-group-item d-flex justify-content-between align-items-center"
                 key={book.id}
               >
                 <BookListItem book={book} />
@@ -26,5 +28,7 @@ class BookList extends Component {
   }
 }
 
-export default BookList
+const mapStateToProps = ({books}) => ({books})
+
+export default connect(mapStateToProps)(BookList)
 

@@ -7,8 +7,8 @@ const BookListItem = ({ book }) => {
 
   return (
     <div>
-      <span>{title}</span>
-      <span>{author}</span>
+      <span>title: {title}; </span>
+      <span>author: {author}</span>
     </div>
   )
 }
