@@ -1,13 +1,16 @@
 import React from "react";
-import Spinner from "../spinner";
-import ErrorIndicator from "../error-indicator";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {CartPage, HomePage} from "../pages";
 
 const App = () => {
+
   return (
-    <div>
-      <Spinner />
-      <ErrorIndicator />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/cart/" exact component={CartPage} />
+      </Switch>
+    </Router>
   )
 }
 
