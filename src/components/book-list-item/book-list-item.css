@@ -1,0 +1,39 @@
+.book-list-item {
+    display: flex;
+    margin: 15px 0;
+}
+
+.book-list-item .book-image {
+    flex-shrink: 0;
+    width: 140px;
+    margin-right: 20px;
+}
+
+.book-list-item img {
+    max-width: 100%;
+}
+
+.book-title {
+    font-size: 1.4rem;
+}
+
+.book-author {
+    font: 1.1rem bold;
+    color: #1d3f72;
+}
+
+.book-price  {
+    font: 1.5rem bold;
+}
+
+.book-list-item .book-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    align-items: flex-start;
+}
+
+.add-to-cart {
+    border-radius: .5rem;
+}
