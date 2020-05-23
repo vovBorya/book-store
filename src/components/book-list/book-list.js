@@ -3,9 +3,10 @@ import BookListItem from "../book-list-item";
 import './book-list.css';
 import { connect } from 'react-redux'
 import { withBookstoreService } from "../hoc";
-import { booksLoaded, booksRequested } from "../../actions";
+import { booksLoaded, booksRequested, booksError } from "../../actions";
 import { compose } from "../../utils";
 import Spinner from "../spinner";
+import ErrorIndicator from "../error-indicator";
 
 class BookList extends Component {
 
@@ -14,7 +15,8 @@ class BookList extends Component {
     const {
       bookstoreService,
       booksLoaded,
-      booksRequested
+      booksRequested,
+      booksError
     } = this.props
     booksRequested();
     bookstoreService
@@ -22,17 +24,20 @@ class BookList extends Component {
       .then((data) => {
         booksLoaded(data)
       })
+      .catch((err) => booksError(err))
   }
 
   render() {
 
-    const { books, loading } = this.props;
+    const { books, loading, error } = this.props;
 
     const loader = (loading) ? <Spinner />: null;
+    const errorIndicator = (error) ? <ErrorIndicator />: null;
 
     return (
       <div className="jumbotron book-list">
         {loader}
+        {errorIndicator}
         <ul className="list-group">
           {
             books.map((book) => (
@@ -50,13 +55,18 @@ class BookList extends Component {
   }
 }
 
-const mapStateToProps = ({books, loading}) => ({
+const mapStateToProps = ({books, loading, error}) => ({
   books,
-  loading
+  loading,
+  error
 })
 
 export default compose(
   withBookstoreService(),
-  connect(mapStateToProps, { booksLoaded, booksRequested })
+  connect(mapStateToProps, {
+    booksLoaded,
+    booksRequested,
+    booksError
+  })
 )(BookList)
 
