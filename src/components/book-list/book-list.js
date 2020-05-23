@@ -8,7 +8,24 @@ import { compose } from "../../utils";
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
-class BookList extends Component {
+const BookList = ({ books }) => (
+  <div className="jumbotron book-list">
+    <ul className="list-group">
+      {
+        books.map((book) => (
+          <li
+            className="list-group-item d-flex justify-content-between align-items-center"
+            key={book.id}
+          >
+            <BookListItem book={book} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+)
+
+class BookListContainer extends Component {
 
   componentDidMount() {
     this.props.fetchBooks()
@@ -18,26 +35,16 @@ class BookList extends Component {
 
     const { books, loading, error } = this.props;
 
-    const loader = (loading) ? <Spinner />: null;
-    const errorIndicator = (error) ? <ErrorIndicator />: null;
+    if (loading) {
+      return <Spinner />
+    }
+
+    if ( error ) {
+      return <ErrorIndicator />
+    }
 
     return (
-      <div className="jumbotron book-list">
-        {loader}
-        {errorIndicator}
-        <ul className="list-group">
-          {
-            books.map((book) => (
-              <li
-                className="list-group-item d-flex justify-content-between align-items-center"
-                key={book.id}
-              >
-                <BookListItem book={book} />
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <BookList books={books} />
     );
   }
 }
@@ -57,5 +64,5 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export default compose(
   withBookstoreService(),
   connect(mapStateToProps,mapDispatchToProps)
-)(BookList)
+)(BookListContainer)
 
