@@ -3,12 +3,12 @@ import BookListItem from "../book-list-item";
 import './book-list.css';
 import { connect } from 'react-redux'
 import { withBookstoreService } from "../hoc";
-import { fetchBooks } from "../../actions";
+import { fetchBooks, bookAddedToCart } from "../../actions";
 import { compose } from "../../utils";
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
-const BookList = ({ books }) => (
+const BookList = ({ books, onAddedToCart }) => (
   <div className="jumbotron book-list">
     <ul className="list-group">
       {
@@ -17,7 +17,7 @@ const BookList = ({ books }) => (
             className="list-group-item d-flex justify-content-between align-items-center"
             key={book.id}
           >
-            <BookListItem book={book} />
+            <BookListItem book={book} onAddedToCart={() => onAddedToCart(book.id)} />
           </li>
         ))
       }
@@ -33,7 +33,7 @@ class BookListContainer extends Component {
 
   render() {
 
-    const { books, loading, error } = this.props;
+    const { books, loading, error, onAddedToCart } = this.props;
 
     if (loading) {
       return <Spinner />
@@ -44,7 +44,7 @@ class BookListContainer extends Component {
     }
 
     return (
-      <BookList books={books} />
+      <BookList books={books} onAddedToCart={onAddedToCart} />
     );
   }
 }
@@ -57,7 +57,8 @@ const mapStateToProps = ({books, loading, error}) => ({
 
 //ownProps is from withBookstoreService
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchBooks: fetchBooks(dispatch, ownProps.bookstoreService)
+  fetchBooks: fetchBooks(dispatch, ownProps.bookstoreService),
+  onAddedToCart: (id) => dispatch(bookAddedToCart(id))
 })
 
 

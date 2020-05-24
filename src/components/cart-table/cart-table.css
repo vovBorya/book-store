@@ -8,7 +8,10 @@
     margin-right: 2rem;
 }
 
-button {
+.buttons {
     float: right;
-    margin: 2px;
+}
+
+button {
+    margin: .2rem;
 }
