@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BookListItem from "../book-list-item";
+import { bindActionCreators } from "redux";
 import './book-list.css';
 import { connect } from 'react-redux'
 import { withBookstoreService } from "../hoc";
@@ -49,17 +50,18 @@ class BookListContainer extends Component {
   }
 }
 
-const mapStateToProps = ({books, loading, error}) => ({
+const mapStateToProps = ( { bookList: {books, loading, error} }) => ({
   books,
   loading,
   error
 })
 
 //ownProps is from withBookstoreService
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchBooks: fetchBooks(dispatch, ownProps.bookstoreService),
-  onAddedToCart: (id) => dispatch(bookAddedToCart(id))
-})
+const mapDispatchToProps = (dispatch, { bookstoreService }) =>
+  bindActionCreators({
+    fetchBooks: fetchBooks(bookstoreService),
+    onAddedToCart: bookAddedToCart
+  }, dispatch)
 
 
 export default compose(
