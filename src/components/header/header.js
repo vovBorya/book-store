@@ -13,7 +13,6 @@ const Header = ({ numItems, total }) => (
             <Link to="/" className="nav-link" >Home <span className="sr-only">(current)</span></Link>
           </li>
         </ul>
-        <Link to="/cart/" className="btn btn-primary" >My cart: {numItems} items (${total})</Link>
       </div>
     </nav>
   </div>

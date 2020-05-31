@@ -10,10 +10,10 @@ export default class BookstoreService {
     },
     {
       id: 2,
-      title: 'JS, i love you',
-      author: 'Vovka',
-      price: 30,
-      image: 'https://miro.medium.com/max/465/0*kBgMf-Nn6Okv0pun.jpg'
+      title: '1984',
+      author: 'George Orwell',
+      price: 90,
+      image: 'https://i.ebayimg.com/images/g/5uwAAOSwSzRZV8H-/s-l300.jpg'
     },
   ]
 
