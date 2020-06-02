@@ -5,7 +5,7 @@ import './header.css'
 const Header = ({ numItems, total }) => (
   <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <Link to="/" className="navbar-brand">Book store</Link>
+      <Link to="/" className="navbar-brand">Boom-Book store</Link>
 
       <div className="collapse navbar-collapse" id="navbarColor02">
         <ul className="navbar-nav mr-auto">
